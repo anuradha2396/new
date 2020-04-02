@@ -1,0 +1,24 @@
+Ques 1 What is the role of oops in programming?
+
+Ans = oops in programming refers to the type of computer programming in which programmers define data type and data structure and also type of operation or we can say function that can be applied to the data structure
+
+In oops profgramming we can create a module that do not need to be changed when a new type of a object is added.you can simply create a new object that inherits the many of features from existing object.
+
+Ques 2 what is encapsulation
+Ans = Encapsulation is a technique in which we wrapped the data into a single unit. ii is mainly used to binds the code into a sinle unit
+
+in the process of encapsulation the variables and data of a class are not vissible to anthor class and can be eccessed by its own class and its data members they onle visible to and accessible by the class in which they declared
+
+We can achieve the encapsulation by declaring varicables of the class as private in this way we acheieve the encapsulation 
+
+
+
+Ques 3 what is polymorphism?
+Ans = Polymorphism is a made up of two words Poly which means Many and Morph which means Forms which means a single method can perform many functios
+
+there are 2 ways to achieve polymorphism
+1.using inheritance
+Inheritance is a property where a child class can inherit the properties and methods of a parent class we can achieve polymorphism using inheritance
+
+2.using duck typing
+Duck typing is anthor way of achieving polymorphism inthis process we only admire the capaliblity and features of object rather tha ints class. in this only matter is that what an object can do rather than what acrtuallt=y it is 

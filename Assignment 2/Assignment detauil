@@ -1,0 +1,30 @@
+Ques:-1 What is module and using module achieve multiple inheritance in ruby
+Ans= In ruby A Module is a collection of methods, constants, and class variables. Modules are defined as a class, but with the module keyword not with class keyword.
+
+Some important points of modules are
+1. we cannot inherit modules or we can’t create a subclass of a module.
+2.Objects cannot be created from a module.
+3.All the classes are modules, but all the modules are not classes.
+4.The name of a module must start with a capital letter.
+
+
+Multiple Inheritance using module:-
+Multiple Inheritance is not directly implemented in ruby,so we use module which eliminates the need of multiple inheitance by providing the facility called a mixin
+
+
+ques:-3 what is module mixin in ruby with example
+Ans= A mixin can basically be thought of as a set of code that can be added to one or more classes to add additional capabilities without using inheritance. In Ruby, a mixin is code wrapped up in a module that a class can include or extend (more on those terms later). In fact, a single class can have many mixins.
+
+Ques:-4  What is class method and class variable, explain with an example
+Ans= In ruby class methods are the methods that are defined inside the class in this public class methods are accessed with the help of the objects.
+and when a method is defined ouside the class defination then it is marked as private by default and the methods are public inside the class defination
+We can access the class variables in 2 ways 
+1.access with help of object 
+2.access without object
+
+Class Variables:-In ruby the that are defined inside the class, where only the class method has access to. Class Variables starts with @@ and must be initialized first then they can be used in method definitions.
+Exampple = @@items = 1
+
+Ques:-5 What is instance method and instance variable, explain with an example
+Ans= An instance variable in ruby has a name starting with @ symbol, and its content is restricted to whatever the object itself refers to. Two separate objects, even though they belong to the same class, are allowed to have different values for their instance variables.
+1.All instance variables are private by default.

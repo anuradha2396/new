@@ -1,0 +1,55 @@
+ques :-1 Explain with an example the use of Private, Protected, and Public methods.
+Ans= Private method :- Private methods cannot be called with an explicit receiver - the receiver is always self. This means that private methods can be called only in the context of the current object; you cannot invoke another object's private methods.In private methods, we do not use the self-keyword. By default, initialize method will be private method. private method can also be inherited
+
+Public method:-Public methods can be called by everyone - no access control is enforced. A class's instance methods (these do not belong only to one object; instead, every instance of the class can call them) are public by default; anyone can call them. The initialize method is always private.
+
+Protected method:-Protected methods can only be called by objects of the defined class and its subclass. The access of these methods is limited in between the defined class or its subclass. You cannot access protected methods outside the defined class or its subclass. The usage of protected methods is finite. Protected methods are defined using protected keyword.
+
+note:-private and protected method can't be accessed outside the class even after inheritance 
+
+ques:-2 What are Accessor Methods? Explain with an example. 
+ans=In Ruby class we may want to expose the instance variables (the variables that are defined prefixed by @ symbol) to other classes for encapsulation. Then, in that case, we use the getter and setter methods. these methods allow us to access a class’s instance variable from outside the class. Getter methods are used to get the value of an instance variable while the setter methods are used to set the value of an instance variable of some class.
+
+some importNT POINT
+1.attr_reader : This accessor generates the automatic Getter method for the given item.
+2.attr_writer : This accessor generates the automatic Setter method for the given item.
+3.attr_accessor : This accessor generates the automatic Getter & Setter method for the given item.
+
+
+ques:-3 What are Constants? Explain with an example.
+Ans=A Ruby constant is like a variable, except that its value is supposed to remain constant for the duration of the program.
+the names of constants look like the names of local variables, except that they begin with a capital letter. By convention, most constants are written in all uppercase with underscores to separate words, LIKE_THIS. Ruby class and module names are also constants, but they are conventionally written using initial capital letters and camel case, LikeThis.
+
+note:- that constants do not exist until a value is actually assigned to them.
+1.Constants defined within a class or module may be accessed anywhere within the class or module.
+2.Outside the class or module, they may be accessed using the scope operator ::
+3.Constants may not be defined in methods.
+4.Constants may be added to existing classes and modules from the outside by using the class or module name and the scope operator before the constant name.
+
+ques:-4 What is the use of self? Explain at least its two use.
+Ans=1.The keyword self in Ruby enables you to access to the current object — the object that is receiving the current message.
+ 2.The word self can be used in the definition of a class method to tell Ruby that the method is for the self, which is in this case the class.
+
+ques:-5 What is the role of super keyword? Explain with an example. 
+Ans= Ruby uses the super keyword to call the superclass implementation of the current method. - Within the body of a method, calls to super acts just like a call to that original method. - The search for a method body starts in the superclass of the object that was found to contain the original method.
+
+ Ruby uses the super keyword to call the superclass implementation of the current method.
+- Within the body of a method, calls to super acts just like a call to that original method.
+- The search for a method body starts in the superclass of the object that was found to contain the original method. 
+
+
+ques:-5 Difference between method overloading and method overriding in ruby? Explain with an example.
+Ans= Method overloading:-Method overloading can be achieved by declaring two methods with the same name and different signatures. These different signatures can be either,
+
+Arguments with different data types, eg: method(int a, int b) vs method(String a, String b)
+Variable number of arguments, eg: method(a) vs method(a, b)
+We cannot achieve method overloading using the first way because there is no data type declaration in ruby(dynamic typed language). So the only way to define the above method is def(a,b)
+
+With the second option, it might look like we can achieve method overloading, but we can't. Let say I have two methods with different number of arguments,
+Example def method(a); end;
+def method(a, b = true); end;
+method(10)
+in this example second argument has a default value and then Now the method call can match the first one as well as the second one, so here is the problem.
+
+Method overriding :-  Override means two methods having same name but doing different tasks.It means that one of the methods overrides another method. If there is any method in the superclass and a method with the same name in its subclass, then by executing these methods, method of the corresponding class will be executed.
+

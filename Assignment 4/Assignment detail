@@ -1,0 +1,49 @@
+ques:-1 What are ruby Built in functions.
+Ans = There are many built in function in ruby. dsome are as under:-
+1.Array(arg)
+Converts the argument to the array using to_a.
+2.Float(arg)
+Converts the argument to the float value
+3.Integer(arg)
+Converts the argument to the integer value. If the argument is string, and happen to start with 0x, 0b, 0, interprets it as hex, binary, octal string respectively.
+4.String(arg)
+Converts the argument to the string using to_s.
+there arec many more examples of builrt in functions like proc,lambda,print and printf etc
+
+ques:-2 Difference between ruby array and hashes.
+Ans= Array:-An array is a collection of different or similar items, stored at contiguous memory locations. The idea is to store multiple items of the same type together which can be referred to by a common name.
+t arrays are of objects type i.e arrays are the collection of ordered, integer-indexed objects which can be store number, integer, string, hash, symbol, objects or even any other array. In general, an array is created by listing the elements which will be separated by commas and enclosed between the square brackets[].
+
+Example:-arr = [12,13,14,15,90]
+the idex of array is started from 0 ,so this array has 4 elements
+Array positive index starts from 0. The negative index always starts with -1 which represents the elements from the end of the array. There can be 2-Dimensonal array i.e array will store another array. It is also termed as the nested arrays.
+
+2.Using literal constructor[] In Ruby, [] is known as the literal constructor which can be used to create the arrays. Between [], different or similar type values can be assigned to an array
+Example :- arr = Array['1','11','33']
+
+
+Hashes:- Hash is a data structure that maintains a set of objects which are termed as the keys and each key associates a value with it. In simple words, a hash is a collection of unique keys and their values. Hashes are sometimes called as associative arrays because it associates values with each of the keys but there is a difference between hashes and arrays. Arrays always use an integer value for indexing whereas hashes use the object. Hashes are also known as the maps because they map keys to values.
+There are several ways to create an array. But there are two ways which mostly used are as follows:
+
+1.Using the new class method: new is a method which can be used to create the arrays with the help of dot operator. Here ::new method with zero, one or more than one arguments is called internally. Passing arguments to method means to provide the size to array and elements to array.
+Example :- numbers = Array.new
+In this example numbers is tha name of array and new is the method anf Array is a class which are predefined and which is used to create array
+
+ques:-3What are blocks, proc and lamda in ruby.
+ans = Blocks:-A block is the same thing as a method, but it does not belong to an object. Blocks are called closures in other programming languages. There are some important points about Blocks in Ruby:
+
+Block can accept arguments and returns a value.
+Block does not have their own name.
+Block consist of chunks of code.
+A block is always invoked with a function or can say passed to a method call.
+To call a block within a method with a value, yield statement is used.
+Blocks can be called just like methods from inside the method that it is passed to.
+
+Proc:-Proc objects are blocks of code that have been bound to a set of local variables. Once bound, the code may be called in different contexts and still access those variables. A Proc can have one, none or many arguments. In this tutorial, we do a deep dive into Ruby procs.
+
+Lambda:-A lambda is a way to define a block & its parameters with some special syntax.
+
+ques:-4 Ruby Date & Time functions
+ans = The Time class represents dates and times in Ruby. It is a thin layer over the system date and time functionality provided by the operating system. This class may be unable on your system to represent dates before 1970 or after 2038.
+
+We can use Time object to get various components of date and time which gives the different objects of time

@@ -8,6 +8,21 @@ Converts the argument to the float value
 Converts the argument to the integer value. If the argument is string, and happen to start with 0x, 0b, 0, interprets it as hex, binary, octal string respectively.
 4.String(arg)
 Converts the argument to the string using to_s.
+5.at_exit
+Register the block for clean-up to execute at the interpreter termination.
+6.autoload(module, file)
+Specifies file to be loaded using the method require, when module accessed for the first time. module must be a string or a symbol.
+7.chop!
+Removes off the last character of the value of the variable $_ (2 characters if the last characters are "\r\n"). chop! modifies the string itself. chop makes a copy to modify.
+8.global_variables
+Returns the list of the global variable names defined in the program.
+9.local_variables
+Returns the list of the local variable names defined in the current scope.
+10.loop
+Loops forever (until terminated explicitly).
+11.exit([status])
+Exits immediately with status. if status is omitted, exits with 0 status.
+
 there arec many more examples of builrt in functions like proc,lambda,print and printf etc
 
 ques:-2 Difference between ruby array and hashes.
@@ -21,6 +36,18 @@ Array positive index starts from 0. The negative index always starts with -1 whi
 2.Using literal constructor[] In Ruby, [] is known as the literal constructor which can be used to create the arrays. Between [], different or similar type values can be assigned to an array
 Example :- arr = Array['1','11','33']
 
+Inbulit functions of array are as under
+1.Array.first = this method is ud-sed to get the first elememts of array
+2.Array.last = this function is used  to grt the last element of of array
+3.Array.fetch()= this function is used to fetch the required element of array
+4.Array.slice()= this function is used to get  new array, leaving the original array unaltered. However, if you use the slice! method, the original array will be changed as well.
+5.Array.take() = this take funcction is used tothe specified number of entries from the beginning of an array
+6.Array.sample()=To get a random element from an array, you could generate a random index between 0 and the last index of the array and use that as an index to retrieve the value, but there’s an easier way: thesample method grabs a random entry from an array.
+7.Array.include?= this include? function, which returns true if the specified data is an element of the array
+8.Array.reverse= Ruby arrays have a reverse function which can reverse the order of the elements in an array.
+9.Array.sort = this function is used to get the sorted array in ruby
+10/Array.push()= this function is used to push the some new elements to the array
+11 Array.pop()- this function is used to delete the specified elements from array
 
 Hashes:- Hash is a data structure that maintains a set of objects which are termed as the keys and each key associates a value with it. In simple words, a hash is a collection of unique keys and their values. Hashes are sometimes called as associative arrays because it associates values with each of the keys but there is a difference between hashes and arrays. Arrays always use an integer value for indexing whereas hashes use the object. Hashes are also known as the maps because they map keys to values.
 There are several ways to create an array. But there are two ways which mostly used are as follows:
@@ -47,3 +74,24 @@ ques:-4 Ruby Date & Time functions
 ans = The Time class represents dates and times in Ruby. It is a thin layer over the system date and time functionality provided by the operating system. This class may be unable on your system to represent dates before 1970 or after 2038.
 
 We can use Time object to get various components of date and time which gives the different objects of time
+
+
+Ques:-4 String methods in ruby
+ans-Ruby has many built in methods to work with strings. Strings in Ruby by default are mutable and can be changed in place or a new string can be returned from a method the methods are as under:-
+1.length:-The .length property returns the number of characters in a string including white-space.
+2.empty:-The .empty? method returns true if a string has a length of zero.
+3.count:-The .count method counts how many times a specific character(s) is found in a string.
+This method is case-sensitive.
+4.insert:-The .insert method inserts a string into another string before a given index.
+5.uppercase:-The .upcase method transforms all letters in a string to uppercase.
+6.downcase:-The .downcase method transforms all letters in a string to lowercase.
+7.reverse:-The .reverse method reverses the order of the characters in a string.
+8.split:-The .split takes a strings and splits it into an array, then returns the array.
+9.chop:-The .chop method removes the last character of the string.
+10.to integer:-The .to_i method converts a string to an integer.
+11.concatenation:-Ruby implements some methods to concatenate two strings together:
+example "15"+"15"  =>"1515" whicjh is astring
+12.index:-he index method returns the index position of the first occurrance of the substring or regular expression pattern match in a string.
+If there is no match found, nil is returned.
+A second optional parameter indicates which index position in the string to begin searching for a match.
+13.clear:-Removes string content.

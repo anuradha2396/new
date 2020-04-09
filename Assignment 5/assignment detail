@@ -1,0 +1,344 @@
+ques:-1 How to set root route in rails?
+Ans= we can build routes on the config/routes.rb file in our rails application.
+The root method defines where Rails should send us for the route / , for example yahoo.com/ .
+It is quite conventional to put the root route at the top of the config/routes.rb file as it is (ideally) the first route to be matched when we navigate to the site. 
+Example :- Rails.application.routes.draw do
+              root to: 'songs#index'
+           end 
+here in this example songs is the name of controller and index is the view page 
+here is also an alternate way to set the root route ehich is as under:-
+
+Example:- root controller: :songs, action: :index
+Example:- root 'songs#index'
+
+All of these will direct us to the same “Songs” site.these are the ways through which we set root route in rails
+
+ques:-2 check all the request methods in rails
+Ans= There are GET,POST,PATCH,PUT and DELETE methods
+1. GET - In this we specifies how a client machine tells a server that it wants information about the item identified by the URI. Because GET requests are all about asking for information, they are not permitted to have request bodies. You still have the URI query string available to you if you need to send data from the client to the server on a GET request.
+In GET method we have:-
+1.index:-which display a list of all the elements
+2.new:-which return an HTML form for creating a new element
+3.show:-which display a specific element
+4.edit:-which return an HTML form for editing a element
+
+
+2.POST - In this we specifies how a client tells a server to add an entity as a child of the object identified by the URI. The entity that the client expects the server to add is transmitted in the request body.
+In POSt method we have :-
+1.create:-which create a new element
+
+3.PATCH/PUT- In this we specifies how a client tells a server it wants to modify an object identified by the URI the request is sent to.
+In put/patch method we have :-
+1.update:- which update a specific element
+
+4.DELETE:-In this you might guess, how a client tells a server to remove an object identified by the URI the request is sent to.
+In delete method we have:-
+1.Destroy:which is used to delete a specific element
+
+ques:-3 when we can use match in routes ?
+Ans= we can use match rutes when rails application recevies an incoming request for exampke : GET/patients/17
+it will asks the controller to match it to a controller action.if the first matchinf=g routes is: get'/ptients/:id', to: 'patients#show'
+In this example the request is dispatched to the patients  controllers show action with {id:17} in params.
+this is the concept of match in routes
+
+ques:-4 Difference between member route and collection routes
+Ans= Member route:-A member route will require an ID, because it acts on a member. Preview is an example of a member route, because it acts on (and displays) a single object.
+ 
+Example of member route:-
+
+resources :photos do
+  member do
+    get :preview
+  end
+end
+
+
+Collection route:- A collection route doesn't because it acts on a collection of objects.Search is an example of a collection route, because it acts on (and displays) a collection of objects.
+
+Example of collection route:-
+
+resources :photos do
+  collection do
+    get :search
+  end
+end
+
+ques:-5 Difference b/w scope, namespace and resource routes
+Ans= namespace:-When you use namespace, it will prefix the URL path for the specified resources, and try to locate the controller under a module named in the same manner as the namespace.
+
+Example:- namespace :admin do
+           resources :homes
+          end 
+
+With this we get
+zapbuild@anuradhaT:/var/www/html/qtech$ rails routes
+The dependency tzinfo-data (>= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x86-mswin32, x64-mingw32, java. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java`.
+         Prefix Verb   URI Pattern                     Controller#Action
+    admin_homes GET    /admin/homes(.:format)          admin/homes#index
+                POST   /admin/homes(.:format)          admin/homes#create
+ new_admin_home GET    /admin/homes/new(.:format)      admin/homes#new
+edit_admin_home GET    /admin/homes/:id/edit(.:format) admin/homes#edit
+     admin_home GET    /admin/homes/:id(.:format)      admin/homes#show
+                PATCH  /admin/homes/:id(.:format)      admin/homes#update
+                PUT    /admin/homes/:id(.:format)      admin/homes#update
+                DELETE /admin/homes/:id(.:format)      admin/homes#destroy
+zapbuild@anuradhaT:/var/www/html/qtech$ 
+
+As you can see, admin was added as a prefix in the URI path (/admin/homes) and as a module containing the controller (admin/homes#index). With this code, Rails will expect Admin::homesController to be located at app/controllers/admin/homes_controller.rb.
+
+Scope :-Scope is a bit more complex - but the advantage is that it gives you more options to fine-tune exactly what you want to do.
+When using scope without any options and only a scope name, it will just change the resources path.
+
+Example:- scope :admin do
+            resources :users
+          end
+With this code we get
+zapbuild@anuradhaT:/var/www/html/qtech$ rails routes
+The dependency tzinfo-data (>= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x86-mswin32, x64-mingw32, java. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java`.
+   Prefix Verb   URI Pattern                     Controller#Action
+    homes GET    /admin/homes(.:format)          homes#index
+          POST   /admin/homes(.:format)          homes#create
+ new_home GET    /admin/homes/new(.:format)      homes#new
+edit_home GET    /admin/homes/:id/edit(.:format) homes#edit
+     home GET    /admin/homes/:id(.:format)      homes#show
+          PATCH  /admin/homes/:id(.:format)      homes#update
+          PUT    /admin/homes/:id(.:format)      homes#update
+          DELETE /admin/homes/:id(.:format)      homes#destroy
+
+As you can see, /admin was added as a prefix before /homes, but the homes controller doesn’t have to be inside any module.
+
+scope supports three options: module, path and as.let us discuss them
+1.module:-module lets us define in which module the controller for the embedded resources will live.
+
+Example:- scope module: 'admin' do
+  		resources :users
+	  end
+
+after doing this we get:-zapbuild@anuradhaT:/var/www/html/qtech$ rails routes
+The dependency tzinfo-data (>= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x86-mswin32, x64-mingw32, java. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java`.
+   Prefix Verb   URI Pattern               Controller#Action
+    homes GET    /homes(.:format)          admin/homes#index
+          POST   /homes(.:format)          admin/homes#create
+ new_home GET    /homes/new(.:format)      admin/homes#new
+edit_home GET    /homes/:id/edit(.:format) admin/homes#edit
+     home GET    /homes/:id(.:format)      admin/homes#show
+          PATCH  /homes/:id(.:format)      admin/homes#update
+          PUT    /homes/:id(.:format)      admin/homes#update
+          DELETE /homes/:id(.:format)      admin/homes#destroy
+
+2.path:-path allows us to set the prefix that will appear in the URI, before the resource name.
+
+Example:- scope module: 'admin', path: 'fu' do
+  		resources :users
+
+	  end
+after this we get:-
+
+zapbuild@anuradhaT:/var/www/html/qtech$ rails routes
+The dependency tzinfo-data (>= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x86-mswin32, x64-mingw32, java. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java`.
+   Prefix Verb   URI Pattern                    Controller#Action
+    homes GET    /from/homes(.:format)          admin/homes#index
+          POST   /from/homes(.:format)          admin/homes#create
+ new_home GET    /from/homes/new(.:format)      admin/homes#new
+edit_home GET    /from/homes/:id/edit(.:format) admin/homes#edit
+     home GET    /from/homes/:id(.:format)      admin/homes#show
+          PATCH  /from/homes/:id(.:format)      admin/homes#update
+          PUT    /from/homes/:id(.:format)      admin/homes#update
+          DELETE /from/homes/:id(.:format)      admin/homes#destroy
+
+3. as:- Finally, as can be used to change the name of the path method used to identify the resources.
+Example:- scope module: 'admin', path: 'fu', as: 'cool' do
+  		resources :users
+	  end
+
+In this case, we now have nice as a prefix for the path names nice_homes and nice_home
+
+zapbuild@anuradhaT:/var/www/html/qtech$ rails routes
+The dependency tzinfo-data (>= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x86-mswin32, x64-mingw32, java. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java`.
+        Prefix Verb   URI Pattern                    Controller#Action
+    nice_homes GET    /from/homes(.:format)          admin/homes#index
+               POST   /from/homes(.:format)          admin/homes#create
+ new_nice_home GET    /from/homes/new(.:format)      admin/homes#new
+edit_nice_home GET    /from/homes/:id/edit(.:format) admin/homes#edit
+     nice_home GET    /from/homes/:id(.:format)      admin/homes#show
+               PATCH  /from/homes/:id(.:format)      admin/homes#update
+               PUT    /from/homes/:id(.:format)      admin/homes#update
+               DELETE /from/homes/:id(.:format)      admin/homes#destroy
+
+
+
+3.resource routes:- the routes generated when we use resources in Rails routes.
+
+Example:-
+	Rails.application.routes.draw do
+  
+
+  		resources :homes
+	end
+
+after doing this we get:-
+
+zapbuild@anuradhaT:/var/www/html/qtech$ rails routes
+The dependency tzinfo-data (>= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x86-mswin32, x64-mingw32, java. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java`.
+   Prefix Verb   URI Pattern               Controller#Action
+    homes GET    /homes(.:format)          homes#index
+          POST   /homes(.:format)          homes#create
+ new_home GET    /homes/new(.:format)      homes#new
+edit_home GET    /homes/:id/edit(.:format) homes#edit
+     home GET    /homes/:id(.:format)      homes#show
+          PATCH  /homes/:id(.:format)      homes#update
+          PUT    /homes/:id(.:format)      homes#update
+          DELETE /homes/:id(.:format)      homes#destroy
+
+ques:-6 How to set nested resources
+Ans=  It's common to have resources that are logically children of other resources. For example, suppose your application includes these models:
+
+class Subject < ApplicationRecord
+	has_many :users
+end
+
+class User < ApplicationRecord
+	belongs_to :subject
+end
+
+Nested routes allow you to capture this relationship in your routing. In this case, you could include this route declaration:
+
+in routes.rb file write this:-
+	Rails.application.routes.draw do
+  		resources :subjects do
+  		resources :users
+	end
+	end
+
+In addition to the routes for subjects, this declaration will also route users to an usersController. 
+
+zapbuild@anuradhaT:/var/www/html/qtech$ rails routes
+The dependency tzinfo-data (>= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x86-mswin32, x64-mingw32, java. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java`.
+           Prefix Verb   URI Pattern                                    Controller#Action
+    subject_users GET    /subjects/:subject_id/users(.:format)          users#index
+                  POST   /subjects/:subject_id/users(.:format)          users#create
+ new_subject_user GET    /subjects/:subject_id/users/new(.:format)      users#new
+edit_subject_user GET    /subjects/:subject_id/users/:id/edit(.:format) users#edit
+     subject_user GET    /subjects/:subject_id/users/:id(.:format)      users#show
+                  PATCH  /subjects/:subject_id/users/:id(.:format)      users#update
+                  PUT    /subjects/:subject_id/users/:id(.:format)      users#update
+                  DELETE /subjects/:subject_id/users/:id(.:format)      users#destroy
+         subjects GET    /subjects(.:format)                            subjects#index
+                  POST   /subjects(.:format)                            subjects#create
+      new_subject GET    /subjects/new(.:format)                        subjects#new
+     edit_subject GET    /subjects/:id/edit(.:format)                   subjects#edit
+          subject GET    /subjects/:id(.:format)                        subjects#show
+                  PATCH  /subjects/:id(.:format)                        subjects#update
+                  PUT    /subjects/:id(.:format)                        subjects#update
+                  DELETE /subjects/:id(.:format)                        subjects#destroy
+
+Important note:-Resources should never be nested more than 1 level deep.
+
+ques:-7 What is shallow nested routes 
+Ans=  Shallow nesting is used to avoid the deep nesting.
+It generate the collection actions scoped under the parent, so as to get a sense of the hierarchy, but to not nest the member actions. In other words, to only build routes with the minimal amount of information to uniquely identify the resource, like this:
+
+Example :- resources :admins do
+  		resources :homes, only: [:index, :new, :create]
+	   end
+	   resources :homes, only: [:show, :edit, :update, :destroy]
+
+here exists shorthand syntax to achieve just that, via the :shallow option:
+
+Example :- resources :articles do
+  		resources :comments, shallow: true
+	   end
+
+after doing this we get:-
+
+zapbuild@anuradhaT:/var/www/html/qtech$ rails routes
+The dependency tzinfo-data (>= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x86-mswin32, x64-mingw32, java. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java`.
+        Prefix Verb   URI Pattern                           Controller#Action
+   admin_homes GET    /admins/:admin_id/homes(.:format)     homes#index
+               POST   /admins/:admin_id/homes(.:format)     homes#create
+new_admin_home GET    /admins/:admin_id/homes/new(.:format) homes#new
+     edit_home GET    /homes/:id/edit(.:format)             homes#edit
+          home GET    /homes/:id(.:format)                  homes#show
+               PATCH  /homes/:id(.:format)                  homes#update
+               PUT    /homes/:id(.:format)                  homes#update
+               DELETE /homes/:id(.:format)                  homes#destroy
+        admins GET    /admins(.:format)                     admins#index
+               POST   /admins(.:format)                     admins#create
+     new_admin GET    /admins/new(.:format)                 admins#new
+    edit_admin GET    /admins/:id/edit(.:format)            admins#edit
+         admin GET    /admins/:id(.:format)                 admins#show
+               PATCH  /admins/:id(.:format)                 admins#update
+               PUT    /admins/:id(.:format)                 admins#update
+               DELETE /admins/:id(.:format)                 admins#destroy
+
+ques:-8 What is concern routing in rails?
+Ans= Routing concerns allow you to declare common routes that can be reused inside other resources and routes.
+
+Example :- concern :commentable do
+  		resources :comments
+	   end
+
+	  scope :admins do
+  		concerns :homes
+  	         end
+          end
+
+After applyimh this routes,rb file we get:-
+
+zapbuild@anuradhaT:/var/www/html/qtech$ rails routes
+The dependency tzinfo-data (>= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x86-mswin32, x64-mingw32, java. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java`.
+      Prefix Verb   URI Pattern                         Controller#Action
+    comments GET    /admins/comments(.:format)          comments#index
+             POST   /admins/comments(.:format)          comments#create
+ new_comment GET    /admins/comments/new(.:format)      comments#new
+edit_comment GET    /admins/comments/:id/edit(.:format) comments#edit
+     comment GET    /admins/comments/:id(.:format)      comments#show
+             PATCH  /admins/comments/:id(.:format)      comments#update
+             PUT    /admins/comments/:id(.:format)      comments#update
+             DELETE /admins/comments/:id(.:format)      comments#destroy
+
+ques:-9 How to use redirection routes in rails?
+Ans= You can redirect any path to another path using the redirect helper in your router:
+Example:- get '/homes' , to: redirect('/admins')
+
+The default redirection is a 301 "Moved Permanently" redirect. Keep in mind that some web browsers or proxy servers will cache this type of redirect, making the old page inaccessible. You can use the :status option to change the response status:
+Example: get '/homes/:name', to: redirect('/admins/%{name}', status: 302)
+
+
+ques:-10 How to set direct routes in rails?
+Ans= we can create cua=stom url helpers directly 
+Example: direct :homes do
+             "http://www.geeksforgeeks.com"
+   	 end
+
+
+ques:-11 Learn how to list the existing application routes
+Ans= here we use http://localhost:3000/rails/info/routes in our browser to grt the list of exixting appliction routes in your browser while your server is running in the development environment.
+
+we can also execute the rails routes command in your terminal to produce the same output.
+command :- rails routes and also use rake routes
+
+zapbuild@anuradhaT:/var/www/html/qtech$ rails routes
+The dependency tzinfo-data (>= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x86-mswin32, x64-mingw32, java. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java`.
+   Prefix Verb   URI Pattern               Controller#Action
+    homes GET    /homes(.:format)          homes#index
+          POST   /homes(.:format)          homes#create
+ new_home GET    /homes/new(.:format)      homes#new
+edit_home GET    /homes/:id/edit(.:format) homes#edit
+     home GET    /homes/:id(.:format)      homes#show
+          PATCH  /homes/:id(.:format)      homes#update
+          PUT    /homes/:id(.:format)      homes#update
+          DELETE /homes/:id(.:format)      homes#destroy
+
+
+If you only want to see the routes that map to a specific controller, there's the -c option.
+commands:- rails routes -c users
+ 	   rails routes -c admin/users
+	   rails routes -c Comments
+	   rails routes -c Articles::CommentsController
+	   rails routes -g admin
+
+
+
+
+

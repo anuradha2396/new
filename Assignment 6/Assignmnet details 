@@ -1,0 +1,144 @@
+Ques:-1 What are controllers in rails ?
+Ans= Controller is the C in MVC. After the router has determined which controller to use for a request, the controller is responsible for making sense of the request, and producing the appropriate output.The controller will receive the request (this is invisible to you as the developer), fetch or save data from a model, and use a view to create HTML output.
+A controller can thus be thought of as a middleman between models and views. It makes the model data available to the view so it can display that data to the user, and it saves or updates user data to the model.
+
+1,Naming conventions of controller:-The naming convention of controllers in Rails favors pluralization of the last word in the controller's name, although it is not strictly required for example :- AdminsController is preferable over the adminController  and clientsController is preferable over clientController.
+
+** Application Controller:-ApplicationController which inherits from ActionController::Base, which contains classes and method definitions for handling HTTP request that enters your application's codebase from the client (web-browser, bots, mobile devices, etc), extract request parameters, process data and return a response back to the client in proper format (XML, HTML, JSON, etc) as per the request.
+So, from an OOP point of view, ApplicationController serves at the top of the hierarchy of all your application's controllers. Thus, most of the common filters/hooks which are required in every part of your applicaion such as: handling authentication, authorization, etc are defined here as this is the first place that the HTTP request hits on your application before delegating to the specified controller.
+
+** ActionController::Base:- The ActionController::Base class takes care of all the web requests, and does the job of passing requests to and from the Rails routes. It makes available methods like :
+1.request (the whole object of the web request made which is used to interpret which controller action to invoke)
+2.params (makes the parameters sent to the server available to your action), session (maintains your session variables), etc.
+
+A controller is a Ruby class which inherits from ApplicationController and has methods just like any other class. When your application receives a request, the routing will determine which controller and action to run, then Rails creates an instance of that controller and runs the method with the same name as the action.
+
+For example :-
+	class EmployeesController < ApplicationController
+  		def new
+  		end
+	end
+As an example, if a user goes to /Employees/new in your application to add a new employee, Rails will create an instance of EmployeesController and call its new method. Note that the empty method from the example above would work just fine because Rails will by default render the new.html.erb view unless the action says otherwise. By creating a new Employee, the new method can make a @Employee instance variable accessible in the view:
+
+		def new
+  		  @employee = Employee.new
+		end
+
+
+Ques:-2 What are model in rails ?
+Ans= The model - which is the layer of the system responsible for representing business data and logic. Active Record facilitates the creation and use of business objects whose data requires persistent storage to a database.
+
+!.ORM:-ORM, is a technique that connects the rich objects of an application to tables in a relational database management system.
+Using ORM, the properties and relationships of the objects in an application can be easily stored and retrieved from a database without writing SQL statements directly and with less overall database access code.
+Using ORM framework we get
+1.Represent models and their data.
+2.Represent associations between these models.
+3.Represent inheritance hierarchies through related models.
+4.Validate models before they get persisted to the database.
+
+
+
+** NAming Convention:-Active Record uses some naming conventions to find out how the mapping between models and database tables should be created. Rails will pluralize your class names to find the respective database table. So, for a class Book, you should have a database table called books.
+
+** schema conventions:-Active Record uses naming conventions for the columns in database tables, depending on the purpose of these columns.
+1.Foreign keys - These fields should be named following the pattern singularized_table_name_id (e.g., item_id, order_id). These are the fields that Active Record will look for when you create associations between your models.
+
+2.Primary keys - By default, Active Record will use an integer column named id as the table's primary key When using Active Record Migrations to create your tables, this column will be automatically created. 
+
+
+** creating models:-It is very easy to create Active Record models. All you have to do is to subclass the ApplicationRecord class and you're good to go:
+
+class Employee < ApplicationRecord
+end
+
+This will create a Employee model, mapped to a employees table at the database.
+
+to create details of tables:=
+create table employees(
+id int(11) NOT NULL auto_increment PRIMARY KEY,
+EMp-name varchar(100));
+
+** VALIDATIONS in models:-Active Record allows you to validate the state of a model before it gets written into the database. There are several methods that you can use to check your models and validate that an attribute value is not empty, is unique and not already in the database, follows a specific format, and many more.
+
+Example of validation:L-
+class Employee < ApplicationRecord
+	validates :name, Presence: true
+end
+
+Employee = Emplyoee.new
+Employee.save
+
+from this validation we get maessage name can't be blank
+
+
+
+*** Creating a model through Migration:=Migrations are stored as files in the db/migrate directory, one for each migration class.
+
+Example :- rails gem=nerate migration emailToEmployees
+This will create an appropriately named empty migration
+
+class EmailToEmployees < ActiveRecord::Migration[5.0]
+  def change
+  end
+end
+
+** Running Migrations : Rails provides a set of rails commands to run certain sets of migrations.
+The very first migration related rails command you will use will probably be rails db:migrate.
+
+
+Ques:-3 Association in rails and create has one and has many association.
+Ans= In Rails, an association is a connection between two Active Record models. Because they make common operations simpler and easier in your code.
+
+1 has-one association:-A has_one association also sets up a one-to-one connection with another model, but with somewhat different semanticsThis association indicates that each instance of a model contains or possesses one instance of another model.
+For example, if each User in your application has only one account, you'd declare the User model like this:
+
+Example:- class User < ApplicationRecord
+               has_one :account
+          end
+The corresponding migration might look like this:
+
+
+class CreateUsers< ActiveRecord::Migration[5.0]
+  def change
+    create_table :Users do |t|
+      t.string :name
+      t.timestamps
+    end
+
+  create_table :accounts do |t|
+      t.belongs_to :User
+      t.string :account_number
+      t.timestamps
+    end
+  end
+end
+
+2. has-many associations:-A has_many association indicates a one-to-many connection with another model. You'll often find this association on the "other side" of a belongs_to association. This association indicates that each instance of the model has zero or more instances of another model. 
+
+Exampe:- 
+class company < ApplicationRecord
+  has_many :Employees
+end
+IMP NOTE: The name of the other model is pluralized when declaring a has_many association.
+
+The corresponding migration might look like this:
+class CreateCompanys < ActiveRecord::Migration[5.0]
+  def change
+    create_table :campanys do |t|
+      t.string :name
+      t.timestamps
+    end
+ 
+    create_table :Employees do |t|
+      t.datetime :published_at
+      t.timestamps
+    end
+  end
+end
+
+
+
+
+
+
+
